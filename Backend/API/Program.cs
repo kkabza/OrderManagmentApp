@@ -20,9 +20,19 @@ builder.Services.AddGraphQLServer()
     .AddQueryType<API.GraphQL.Query>()
     .AddFiltering(); // Add the necessary using statement and package reference for the AddFiltering method.
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 var app = builder.Build();
 
-app.UseCors(AllowSpecificOrigins);
+app.UseCors("AllowAll");
 app.MapGraphQL();
 app.UseGraphQLVoyager("/graphql-voyager", new VoyagerOptions() { GraphQLEndPoint = "/graphql" });
 app.Run();
