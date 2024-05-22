@@ -19,7 +19,7 @@ export default function CustomersDashboard() {
         <ul>
             {customersData.customers?.map((customer => (
                 <li key={customer?.id}>{customer?.firstName}</li>
-            ))}
+            )))}
         </ul>
     </div>
   )
